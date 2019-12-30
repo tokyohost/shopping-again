@@ -11,4 +11,6 @@ public interface ProductService {
     public void updateProduct(Product p)throws Exception;
     public List<ProductType> getProductTypes()throws Exception;
     public List<Product> queryPdtsById(int typeid)throws Exception;
+    public void updateProductType(ProductType pt)throws Exception;
+    public void insertProductType(ProductType pt)throws Exception;
 }

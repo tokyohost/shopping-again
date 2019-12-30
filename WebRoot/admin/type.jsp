@@ -4,7 +4,6 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	List<Product> plist =(List<Product>) session.getAttribute("plist");
 	List<ProductType> ptype =(List<ProductType>) session.getAttribute("ptype");
 %>
 <!DOCTYPE>
@@ -125,31 +124,28 @@ th.nobg {
 		ca.submit();
 	
 	}
-	<%for(Product pitem:plist){ %>
 	
-		
-	function changep<%=pitem.getPid() %>(){
-		var ca = document.getElementById("pid<%=pitem.getPid() %>");
-		ca.action = "/shopping/servlet/ChangeProductServlet";
+	<%for(ProductType pt :ptype){%>
+	
+	function changet<%= pt.getCid() %>(){
+		var ca = document.getElementById("tid<%=pt.getCid() %>");
+		ca.action = "/shopping/servlet/ChangeTypeServlet";
 		ca.submit();
 	
 	}
-	function deletep<%=pitem.getPid() %>(){
-		var ca = document.getElementById("pid<%=pitem.getPid() %>");
-		ca.action = "/shopping/servlet/DeleteProductServlet";
-		ca.submit();
 	
-	}
+	
 	<%}%>
 	
-	function addNewProduct(obj) {
+	
+	function addNewProductType() {
     	var ca = document.getElementById("addNew");
-		ca.action = "/shopping/servlet/AddNewProductServlet";
+		ca.action = "/shopping/servlet/AddNewProductTypeServlet";
 		ca.submit();
 	}
 	function search() {
-		var ca = document.getElementById("ProductSearch");
-		ca.action = "/shopping/servlet/SearchProductServlet";
+		var ca = document.getElementById("ProductTypeSearch");
+		ca.action = "/shopping/servlet/SearchProductTypeServlet";
 		ca.submit();
 		
 	}
@@ -204,99 +200,48 @@ th.nobg {
 			<div style="float:right;width:85%;background-color:#fff;height:1000px;">
 				<!-- 右边详情页 -->
 				
-				<h1 style="margin-left:40px;margin-top:40px;margin-bottom:20px;font-size:24px;">商品管理页面</h1>
+				<h1 style="margin-left:40px;margin-top:40px;margin-bottom:20px;font-size:24px;">商品类型管理页面</h1>
 				<table id="mytable" cellspacing="0"
 						summary="The technical specifications of the Apple PowerMac G5 series">
 						<tr>
 						<th scope="col" abbr="Dual 1.8">
-								商品id
+								类型id
 							</th>
 							<th scope="col" abbr="Dual 1.8">
-								商品名称
+								类型名称
 							</th>
 							<th scope="col" abbr="Dual 2">
-								商品归属
+								型号
 							</th>
+							
 							<th scope="col" abbr="Dual 2.5">
-								商品生产日期
-							</th>
-							<th scope="col" abbr="Dual 2.5">
-								商品供应商
-							</th>
-							<th scope="col" abbr="Dual 2.5">
-								商品简介
-							</th>
-							<th scope="col" abbr="Dual 2.5">
-								商品数量
-							</th>
-							<th scope="col" abbr="Dual 2.5">
-								商品价格
-							</th>
-							<th scope="col" abbr="Dual 2.5">
-								商品图片地址
-							</th>
-							<th scope="col" abbr="Dual 2.5">
-								商品操作
+								类型操作
 							</th>
 						</tr>
 						
-						<%for(Product item:plist){ %>
-						<form id="pid<%=item.getPid() %>" method="post" action="" >
+						<%for(ProductType item:ptype){ %>
+						<form id="tid<%=item.getCid() %>" method="post" action="" >
 							<tr>
 								<td>
-									<%= item.getPid() %>
-									<input type="hidden" name="pid" value="<%= item.getPid()%>">
+									<%= item.getCid() %>
+									<input type="hidden" name="tid" value="<%= item.getCid()%>">
 								</td>
 								<td>
-									<input type="text" name="pname" value="<%= item.getPname()%>">
+									<input type="text" name="tname" value="<%= item.getcName()%>">
 								</td>
 								<td>
-									<select name="pclassifyid">        <!--下拉列表框-->
-										<%for (ProductType pt:ptype){ %>
-										<%if(Integer.valueOf(item.getPclassifyid())==pt.getCid()){ %>
-											<option value="<%= pt.getCid()%>" selected="selected"><%=pt.getcName() %></option>
-										<%}else{ %>
-											<option value="<%= pt.getCid()%>"><%=pt.getcName() %></option>
-										<%} %>
-										<%} %>
-									</select>
+									<input type="text" name="txinhao" value="<%= item.getCxinhao()%>">
 								</td>
 								<td>
-									<input type="datetime" name="pdate" value="<%=item.getPdate() %>" style="width:80px;">
-								</td>
-								<td> 
-									<input type="text" name="suppliers" value="<%=item.getSuppliers() %> " style="width:80px;">
-								</td>
-								<td> 
-									<input type="text" name="descw" value="<%=item.getDescw() %> " style="width:80px;">
-								</td>
-								<td>
-									<input type="number" name="pnumber" step="1" value="<%=item.getPnumber() %>" style="width:40px;">
-								</td>
-								<td>
-									<input type="number" name="price" step="0.01" value="<%=item.getPrice() %>" style="width:65px;">
-								</td>
-								<td>
-									<input type="text" name="img" value="<%=item.getImg() %>" style="width:80px;">
-								</td>
-								<td style="width:100px;">
-								<%if( item.getIs_delete() == 0 ){%>
 								<div style="width:45px;height:100%;float:left;">
 								
- 								<input  type="button"  value="提交修改" style="float:left;" onclick="changep<%=item.getPid() %>()" >
+ 								<input  type="button"  value="提交修改" style="float:left;" onclick="changet<%=item.getCid() %>()" >
 								</div>
-								<div style="width:45px;height:100%;float:right;">
-								<input type="button" value="删除商品" style="float:right;" onclick="deletep<%=item.getPid() %>()">
+								<!-- <div style="width:45px;height:100%;float:right;">
+								<input type="button" value="删除商品" style="float:right;" onclick="deletep<%=item.getCid() %>()">
 								</div>
-								<%}else{ %>
-								<div style="width:45px;height:100%;float:left;">
+								 -->
 								
- 								<input  type="button" disabled="disabled"  value="提交修改" style="float:left;" onclick="changep<%=item.getPid() %>()" >
-								</div>
-								<div style="width:45px;height:100%;float:right;">
-								<input type="button" value="已删除" disabled="disabled" style="float:right;" onclick="deletep<%=item.getPid() %>()">
-								</div>
-								<%} %>
 								</td>
 							</tr>
 							</form>
@@ -305,45 +250,24 @@ th.nobg {
 							<tr>
 								<td>
 									
-									新商品*
+									新商品类型*
 								</td>
 								<td>
-									<input type="text" name="pname" value=""><span style="color:red">*</span>
+									<input type="text" name="cname" value=""><span style="color:red">*</span>
 								</td>
 								<td>
-								<select name="pclassifyid">        <!--下拉列表框-->
-								<%for (ProductType pt:ptype){ %>
-									<option value="<%= pt.getCid()%>"><%=pt.getcName() %></option>
-								<%} %>
-								</select>
+									<input type="text" name="cxinhao" value="" ><span style="color:red">*</span>
 								</td>
-								<td>
-									<input type="datetime" name="pdate" value="" style="width:80px;"><span style="color:red">*</span>
-								</td>
-								<td> 
-									<input type="text" name="suppliers" value="" style="width:80px;"><span style="color:red">*</span>
-								</td>
-								<td> 
-									<input type="text" name="descw" value="" style="width:80px;"><span style="color:red">*</span>
-								</td>
-								<td>
-									<input type="number" name="pnumber" step="1"  style="width:40px;" value="0"><span style="color:red">*</span>
-								</td>
-								<td>
-									<input type="number" name="price" step="0.01"  style="width:65px; "  value="0"><span style="color:red">*</span>
-								</td>
-								<td>
-									<input type="text" name="img" value="" style="width:80px;"><span style="color:red">*</span>
-								</td>
+								
 								<td style="width:100px;">
-								<input type="button" value="添加商品" onclick="addNewProduct()">
+								<input type="button" value="添加商品类型" onclick="addNewProductType()">
 								</td>
 							</tr>
 							</form>
 					</table>
 					<div style="width:100%;height:100px;margin-left:40px;margin-right:40px;margin-top:100px;">
-					 <form id="ProductSearch" action="" method="post" >
-					 <input type="text" name="qureyKey" value="" placeholder="输入商品名字" style="margin-left:0px;">
+					 <form id="ProductTypeSearch" action="" method="post" >
+					 <input type="text" name="qureyKey" value="" placeholder="输入商品类型名字" style="margin-left:0px;">
 
  					 <input type="button" value="查询" onclick="search()">
  					 </form>

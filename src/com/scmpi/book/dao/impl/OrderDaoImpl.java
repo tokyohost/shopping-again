@@ -24,7 +24,7 @@ public class OrderDaoImpl implements OrderDao {
 			User u = o.getUser();
 			int uid = u.getUid();
 			Getorder_uuid gu = new  Getorder_uuid();
-			String uuid = gu.getuuid();	//»ñÈ¡uuid×÷Îª¶©µ¥Î¨Ò»Ê¶±ðÂë
+			String uuid = gu.getuuid();	//ï¿½ï¿½È¡uuidï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Î¨Ò»Ê¶ï¿½ï¿½ï¿½ï¿½
 			String sql = "insert into `Order`(`user_id`,`Total_amount`,`order_date`,`order_status`,`uuid`)values("
 				+ uid
 				+ ","
@@ -33,7 +33,7 @@ public class OrderDaoImpl implements OrderDao {
 				+ o.getOrder_status() + "','"+uuid+"')";
 			System.out.println("SQL="+sql);
 			DBUtil.Update(sql);	
-//			o.setOrder_id(ids);	//±íÖÐÊÇ×Ô¶¯µÝÔö£¬Ó¦¸Ã²»ÓÃ»ñÈ¡
+//			o.setOrder_id(ids);	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ã²ï¿½ï¿½Ã»ï¿½È¡
 			
 			
 //			
@@ -42,24 +42,24 @@ public class OrderDaoImpl implements OrderDao {
 				String sql1 = "insert into `Order_item`(`Oid`,`user_id`,`product_id`,`order_num`,`order_Subtotal`,`uuid`) values(NULL,"
 						+ u.getUid() + ","+oi.getP().getPid()+","+oi.getOrder_num()+","+oi.getOrder_subtotal()+",'"+uuid+"')";
 				DBUtil.Update(sql1);
-//				oi.setOiid(itemid);	//oid×ÔÔöÎÞÐèÉèÖÃ
+//				oi.setOiid(itemid);	//oidï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				
 			}
 			
-			//ÒÔÏÂ¶ÔÏÂµ¥ÉÌÆ·ÊýÁ¿½øÐÐÐÞ¸Ä
+			//ï¿½ï¿½ï¿½Â¶ï¿½ï¿½Âµï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
 			
 			for (OrderItem oi : o.getItems()){
-				int pid = oi.getP().getPid();	//»ñÈ¡ÐèÒªÐÞ¸ÄµÄÉÌÆ·id
+				int pid = oi.getP().getPid();	//ï¿½ï¿½È¡ï¿½ï¿½Òªï¿½Þ¸Äµï¿½ï¿½ï¿½Æ·id
 				/*
-				 * (oi.getP().getPnumber()-oi.getOrder_num()) »ñÈ¡Ö®Ç°ÉÌÆ·ÊýÁ¿¼õÈ¥ÏÂµ¥ÏîÖÐÐ¡¼ÆÊýÁ¿
+				 * (oi.getP().getPnumber()-oi.getOrder_num()) ï¿½ï¿½È¡Ö®Ç°ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				 */
 				String changeSql = "UPDATE `product_item` SET  `pnumber` = "+(oi.getP().getPnumber()-oi.getOrder_num())+" WHERE `pid` = "+pid+";";
 				
 				DBUtil.Update(changeSql);
 			}
 			
-			//ÒÔÏÂ¶ÔÓÃ»§Óà¶î½øÐÐÐÞ¸Ä
-			float balance = u.getBalance()-o.getTotal_amount();	//¼ÆËãÏÂµ¥ºó¼õÈ¥×Ü¼ÛºóÓÃ»§Óà¶î
+			//ï¿½ï¿½ï¿½Â¶ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
+			float balance = u.getBalance()-o.getTotal_amount();	//ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½È¥ï¿½Ü¼Ûºï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½
 			String cBalanceSql = "UPDATE `user` SET `balance` = "+balance+" WHERE `uid` = "+u.getUid()+";";
 			DBUtil.Update(cBalanceSql);
 			
@@ -71,11 +71,11 @@ public class OrderDaoImpl implements OrderDao {
 	
 	
 	public List<Order> queryOrder(User u) throws ClassNotFoundException, SQLException{
-		//´ÓÊý¾Ý¿â»ñÈ¡¶©µ¥ÐÅÏ¢
+		//ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 		
 		String sql = "select * from `Order` where `user_id`="+u.getUid();
 		
-		//»ñÈ¡¶©µ¥½á¹û¼¯
+		//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		ResultSet rs = DBUtil.queryData(sql);
 		
 		
@@ -92,17 +92,17 @@ public class OrderDaoImpl implements OrderDao {
 				
 				
 				
-				orderlist.add(o);//Ìí¼Óµ½½á¹ûÁÐ±íÖÐ
+				orderlist.add(o);//ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½
 				
 			}
-			//»ñÈ¡¹ØÏµ¶ÔÏó¶©µ¥Ã¿Ò»Ïîorder_item
+			//ï¿½ï¿½È¡ï¿½ï¿½Ïµï¿½ï¿½ï¿½ó¶©µï¿½Ã¿Ò»ï¿½ï¿½order_item
 			for(Order o:orderlist){
 				List<OrderItem> oid = new ArrayList<OrderItem>();
 				String uuid = o.getUuid();
-				//¸ù¾Ý¶©µ¥uuid²éÑ¯¶©µ¥Ïî
+				//ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½uuidï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				String sql1 = "select * from `Order_item` where `uuid`='"+uuid+"';";
 
-				rs = DBUtil.queryData(sql1);	//²éÑ¯½á¹û¼¯ÖØÐÂ¸³Öµ
+				rs = DBUtil.queryData(sql1);	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Öµ
 				
 					while(rs.next()){
 						OrderItem oi = new OrderItem();
@@ -116,14 +116,14 @@ public class OrderDaoImpl implements OrderDao {
 						oid.add(oi);
 					}
 					
-					//¸ù¾Ýproduct_id ²éÑ¯ÉÌÆ·ÐÅÏ¢
+					//ï¿½ï¿½ï¿½product_id ï¿½ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 					for(OrderItem oi:oid){
-						int productid = oi.getProduct_id();	//»ñÈ¡product_id ²éÑ¯product_itemÖÐµÄÉÌÆ·Ïî
+						int productid = oi.getProduct_id();	//ï¿½ï¿½È¡product_id ï¿½ï¿½Ñ¯product_itemï¿½Ðµï¿½ï¿½ï¿½Æ·ï¿½ï¿½
 						
 						String sql2 = "select * from `product_item` where `pid`="+productid+";";
 						
 						
-						rs = DBUtil.queryData(sql2);	//²éÑ¯½á¹û¼¯ÖØÐÂ¸³Öµ
+						rs = DBUtil.queryData(sql2);	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Öµ
 						
 						
 							while(rs.next()){
@@ -139,7 +139,7 @@ public class OrderDaoImpl implements OrderDao {
 								oi.setP(p);
 							}
 					}
-					Set<OrderItem> cache = new HashSet<OrderItem>(oid);			//ListÁÐ±í×ª  Set£¬ÕæÎÞÇé£¡
+					Set<OrderItem> cache = new HashSet<OrderItem>(oid);			//Listï¿½Ð±ï¿½×ª  Setï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¡
 					o.setItems(cache);
 			}
 			
@@ -151,11 +151,11 @@ public class OrderDaoImpl implements OrderDao {
 	
 	
 	public List<Order> queryAllOrder() throws ClassNotFoundException, SQLException{
-		//´ÓÊý¾Ý¿â»ñÈ¡ËùÓÐ¶©µ¥ÐÅÏ¢
+		//ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 		
-		String sql = "select * from `Order`";
+		String sql = "select * from `Order` order by `Order_id` desc LIMIT 10";
 		
-		//»ñÈ¡¶©µ¥½á¹û¼¯
+		//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		ResultSet rs = DBUtil.queryData(sql);
 		
 		
@@ -172,17 +172,17 @@ public class OrderDaoImpl implements OrderDao {
 				
 				
 				
-				orderlist.add(o);//Ìí¼Óµ½½á¹ûÁÐ±íÖÐ
+				orderlist.add(o);//ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½
 				
 			}
-			//»ñÈ¡¹ØÏµ¶ÔÏó¶©µ¥Ã¿Ò»Ïîorder_item
+			//ï¿½ï¿½È¡ï¿½ï¿½Ïµï¿½ï¿½ï¿½ó¶©µï¿½Ã¿Ò»ï¿½ï¿½order_item
 			for(Order o:orderlist){
 				List<OrderItem> oid = new ArrayList<OrderItem>();
 				String uuid = o.getUuid();
-				//¸ù¾Ý¶©µ¥uuid²éÑ¯¶©µ¥Ïî
+				//ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½uuidï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				String sql1 = "select * from `Order_item` where `uuid`='"+uuid+"';";
 
-				rs = DBUtil.queryData(sql1);	//²éÑ¯½á¹û¼¯ÖØÐÂ¸³Öµ
+				rs = DBUtil.queryData(sql1);	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Öµ
 				
 					while(rs.next()){
 						OrderItem oi = new OrderItem();
@@ -196,14 +196,14 @@ public class OrderDaoImpl implements OrderDao {
 						oid.add(oi);
 					}
 					
-					//¸ù¾Ýproduct_id ²éÑ¯ÉÌÆ·ÐÅÏ¢
+					//ï¿½ï¿½ï¿½product_id ï¿½ï¿½Ñ¯ï¿½ï¿½Æ·ï¿½ï¿½Ï¢
 					for(OrderItem oi:oid){
-						int productid = oi.getProduct_id();	//»ñÈ¡product_id ²éÑ¯product_itemÖÐµÄÉÌÆ·Ïî
+						int productid = oi.getProduct_id();	//ï¿½ï¿½È¡product_id ï¿½ï¿½Ñ¯product_itemï¿½Ðµï¿½ï¿½ï¿½Æ·ï¿½ï¿½
 						
 						String sql2 = "select * from `product_item` where `pid`="+productid+";";
 						
 						
-						rs = DBUtil.queryData(sql2);	//²éÑ¯½á¹û¼¯ÖØÐÂ¸³Öµ
+						rs = DBUtil.queryData(sql2);	//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Öµ
 						
 						
 							while(rs.next()){
@@ -219,7 +219,7 @@ public class OrderDaoImpl implements OrderDao {
 								oi.setP(p);
 							}
 					}
-					Set<OrderItem> cache = new HashSet<OrderItem>(oid);			//ListÁÐ±í×ª  Set£¬ÕæÎÞÇé£¡
+					Set<OrderItem> cache = new HashSet<OrderItem>(oid);			//Listï¿½Ð±ï¿½×ª  Setï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¡
 					o.setItems(cache);
 			}
 			
@@ -232,8 +232,8 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public void updateOrder(Order o) throws Exception {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-		//ÐÞ¸Ä¶©µ¥×´Ì¬£¬×Ü½ð¶î
+		// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ÉµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½Þ¸Ä¶ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Ü½ï¿½ï¿½
 		String sql="UPDATE `Order` SET  `Total_amount` = "+o.getTotal_amount()+", `order_status` = '"+o.getOrder_status()+"' WHERE `uuid` = '"+o.getUuid()+"';";
 		
 		DBUtil.Update(sql);

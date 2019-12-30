@@ -58,6 +58,8 @@ public class ProductServiceImpl implements ProductService {
 		
 		DBUtil.Update(sql);
 		
+		
+		
 	}
 
 	public List<ProductType> getProductTypes() throws Exception {
@@ -68,6 +70,24 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> queryPdtsById(int typeid) throws Exception {
 		
 		return dao.queryPdtsById(typeid);
+	}
+
+	@Override
+	public void updateProductType(ProductType pt) throws Exception {
+		// TODO 自动生成的方法存根
+		//修改商品类型
+		
+		String sql = "UPDATE `xiankadatabase`.`product_category` SET `cname` = '"+pt.getcName()+"', `cxinhao` = '"+pt.getCxinhao()+"' WHERE `cid` = "+pt.getCid()+";";
+		
+		DBUtil.Update(sql);
+	}
+
+	@Override
+	public void insertProductType(ProductType pt) throws Exception {
+		// TODO 自动生成的方法存根
+		//添加商品类型
+		String sql ="INSERT INTO `xiankadatabase`.`product_category`( `cname`, `cxinhao`) VALUES ('"+pt.getcName()+"', '"+pt.getCxinhao()+"');";
+		DBUtil.Update(sql);
 	}
 
 

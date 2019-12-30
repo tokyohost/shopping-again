@@ -170,6 +170,20 @@
     <servlet-name>SearchOrderServlet</servlet-name>
     <servlet-class>com.scmpi.book.admin.SearchOrderServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TypeAdminServlet</servlet-name>
+    <servlet-class>com.scmpi.book.admin.TypeAdminServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ChangeTypeServlet</servlet-name>
+    <servlet-class>com.scmpi.book.admin.ChangeTypeServlet</servlet-class>
+  </servlet>
+
+
 
     <servlet-mapping>
         <servlet-name>ReceiptServlet</servlet-name>
@@ -215,4 +229,20 @@
     <servlet-name>SearchOrderServlet</servlet-name>
     <url-pattern>/servlet/SearchOrderServlet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TypeAdminServlet</servlet-name>
+    <url-pattern>/servlet/TypeAdminServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ChangeTypeServlet</servlet-name>
+    <url-pattern>/servlet/ChangeTypeServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+        <servlet-name>AddNewProductTypeServlet</servlet-name>
+        <servlet-class>com.scmpi.book.admin.AddNewProductTypeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddNewProductTypeServlet</servlet-name>
+        <url-pattern>/servlet/AddNewProductTypeServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

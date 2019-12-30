@@ -60,6 +60,12 @@ html>body td {
 		ca.submit();
 	
 	}
+	function type(){
+		var ca = document.getElementById("typeID");
+		ca.action = "/shopping/servlet/TypeAdminServlet";
+		ca.submit();
+	
+	}
 	function product(){
 		var ca = document.getElementById("productID");
 		ca.action = "/shopping/servlet/ProductAdminServlet";
@@ -119,7 +125,11 @@ html>body td {
 						<a href="javascript:order();" style="width:100%;height:100%;border:0px;line-height:30px; text-align:center;display:block;background-color:#272822" >订单管理</a>
 						</form>
 					</li>
-					
+					<li style="list-style-type:none;border:1px #000 solid;height:30px;width:90%;margin:0 auto;margin-left:10px;mrigin-right:10px;margin-top:10px;">
+						<form id="typeID" method="get" action="">
+						<a href="javascript:type();" style="width:100%;height:100%;border:0px;line-height:30px; text-align:center;display:block;background-color:#272822" >商品类型管理</a>
+						</form>
+					</li>
 				</ul>
 				
 			</div>

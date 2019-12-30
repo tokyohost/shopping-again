@@ -121,7 +121,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	}
 
-	// ²úÆ·ÀàÐÍ
+	// ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 	public List<ProductType> getProductTypes() throws Exception {
 
 		List<ProductType> list = new ArrayList<ProductType>();
@@ -133,6 +133,7 @@ public class ProductDaoImpl implements ProductDao {
 				ProductType pt = new ProductType();
 				pt.setCid(rs.getInt("cid"));
 				pt.setcName(rs.getString("cname"));
+				pt.setCxinhao(rs.getString("cxinhao"));
 				list.add(pt);
 			}
 			return list;

@@ -8,4 +8,6 @@ public interface UserService {
 	public User getUser(int uid) throws Exception;
 	public int getUserCount() throws Exception;
 	public List<User> queryAllUser()throws Exception;
+	public void updateUser(User u)throws Exception;
+	public void deleteUser(User u)throws Exception;
 }

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import adminAction.UserAdminAction;
+
 import com.scmpi.book.entity.Order;
 import com.scmpi.book.entity.User;
 import com.scmpi.book.service.OrderService;
@@ -19,7 +21,7 @@ import com.scmpi.book.service.impl.UserServiceImpl;
 public class UserAdminServlet extends HttpServlet {
 
 	/*
-	 * 后台用户管理
+	 * 后台用户管理路由
 	 * 
 	 */
 	
@@ -33,20 +35,32 @@ public class UserAdminServlet extends HttpServlet {
 		//获取session 存储商品订单信息
 		HttpSession session = req.getSession(true);
 		
-		UserService user = new UserServiceImpl();
 		
-		try {
-			session.setAttribute("userCount", user.getUserCount());
-		} catch (Exception e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
+		String action = req.getParameter("action");
+		
+		switch(action){
+		case "home":
+			//跳转到home
+			new UserAdminAction().UserAdminServlet(req, res);
+			break;
+		case "search":
+			//跳转到搜索
+			new UserAdminAction().SearchUserServlet(req, res);
+			break;
+		case "change":
+			//跳转到修改
+			new UserAdminAction().changeUserServlet(req, res);;
+			break;
+		case "delete":
+			//删除用户
+			new UserAdminAction().deleteUserServlet(req, res);
+			break;
+			
+		default :
+			//跳转到home
+			new UserAdminAction().UserAdminServlet(req, res);
+			break;
 		}
-		
-		//页面跳转
-		req.getRequestDispatcher("/admin/user.jsp").forward(req, res);
-		
-		
-		
-		
+	
 	}
 }

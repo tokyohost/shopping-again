@@ -102,7 +102,7 @@ th.nobg {
 
 	function user(){
 		var ca = document.getElementById("userID");
-		ca.action = "/shopping/servlet/UserAdminServlet";
+		ca.action = "/shopping/servlet/UserAdminServlet?action=home";
 		ca.submit();
 	
 	}

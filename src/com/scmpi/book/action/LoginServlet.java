@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 		 try{
 			if(name.equals(prop.getProperty("AdminUserName")) && password.equals(prop.getProperty("AdminUserPasswd"))){
 				
-				req.getRequestDispatcher("/servlet/UserAdminServlet").forward(req,res);
+				req.getRequestDispatcher("/servlet/UserAdminServlet?action=home").forward(req,res);
 			}else{
 				
 	        	User u=uservice.login(name, password);

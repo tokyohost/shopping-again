@@ -75,5 +75,49 @@ public class UserServiceImpl implements UserService {
 		
 		return uList;
 	}
+	@Override
+	public void updateUser(User u) throws Exception {
+		// TODO Auto-generated method stub
+		//修改用户信息
+		
+		String sql = "UPDATE `user` SET `uname` = '"+u.getUname()
+				+"', `upasswd` = '"+u.getUpasswd()
+				+"', `uemail` = '"+u.getUemail()
+				+"', `usex` = '"+u.getUsex()
+				+"', `birthday` = '"+u.getBirthday()
+				+"', `uphone` = '"+u.getUphone()
+				+"', `uaddress` = '"+u.getUaddress()
+				+"', `balance` = "+u.getBalance()
+				+", `discount` = "+u.getDiscount()
+				+", `integral` = "+u.getIntegral()
+				+" WHERE `uid` = "+u.getUid()+";";
+		DBUtil.Update(sql);
+		
+	}
+	@Override
+	public void deleteUser(User u) throws Exception {
+		// TODO Auto-generated method stub
+		/**
+		 * 删除用户
+		 * 首先依次删除外键引用的表信息
+		 * 依次删除以下表信息
+		 * 1、cart
+		 * 2、Order_item
+		 * 3、Order
+		 * 4、user
+		 * 最后完成删除用户
+		 * 
+		 */
+		String sql = "delete from `cart` where user_id="+u.getUid()+";";
+		String sql2 = "delete from `Order_item` where  user_id = "+u.getUid()+";";
+		String sql3 = "delete from `Order` where user_id = "+u.getUid()+";";
+		String sql4 = "delete from `user` where uid = "+u.getUid()+";";
+		
+		DBUtil.Update(sql);
+		DBUtil.Update(sql2);
+		DBUtil.Update(sql3);
+		DBUtil.Update(sql4);
+		
+	}
 
 }

@@ -55,6 +55,10 @@ public class UserAdminServlet extends HttpServlet {
 			//删除用户
 			new UserAdminAction().deleteUserServlet(req, res);
 			break;
+		case "addnew":
+			//添加新用户
+			new UserAdminAction().addNewUserServlet(req, res);
+			break;
 			
 		default :
 			//跳转到home

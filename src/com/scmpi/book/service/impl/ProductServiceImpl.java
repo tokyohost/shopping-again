@@ -25,10 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
 	}
 
-	public void insert(String name, String desc, double price)throws Exception {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	public List<Product> queryAll()throws Exception {
 		return dao.queryAll();

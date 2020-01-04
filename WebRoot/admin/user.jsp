@@ -38,8 +38,8 @@ a {
 	color: #FF0000;
 }
 #mytable {
-	margin-top:100px;
-	width: 700px;
+	margin-top:20px;
+	width: 100%;
 	padding: 0;
 	margin: 0 auto;
 	margin-left:40px;
@@ -161,7 +161,7 @@ th.nobg {
 		</header>
 		
 		<div  style="overfloat:hidden;height:1200px;width:90%;margin:0 auto; margin-top:80px;">
-			<div style="width:15%;height:1000px;float:left;background-color:#ccc">
+			<div style="width:15%;height:100%;float:left;background-color:#ccc">
 				<!-- 左边菜单 -->
 				<ul style="width:100%;height:100%;">
 					<li style="list-style-type:none;border:1px #000 solid;height:30px;width:90%;margin:0 auto;margin-left:10px;mrigin-right:10px;margin-top:10px;">
@@ -187,18 +187,20 @@ th.nobg {
 				</ul>
 				
 			</div>
-			<div style="float:right;width:85%;background-color:#fff;height:1000px;">
+			<div style="float:right;width:85%;background-color:#fff;height:100%;">
 				<!-- 右边详情页 -->
 				<h1 style="margin-left:40px;margin-top:40px;margin-bottom:20px;font-size:24px;">用户管理页面</h1>
 				<h2 style="margin-left:40px;">当前系统注册用户共<%= userCount %>人</h2>
 				
-				<div style="width:100%;height:100px;margin-left:40px;margin-right:40px;margin-top:100px;">
+				<div style="width:100%;height:100px;margin-left:40px;margin-right:40px;margin-top:20px;">
 					 <form id="UserSearch" action="" method="post" >
 					 <input type="text" name="qureyKey" value="" placeholder="输入用户名字或者用户ID" style="margin-left:0px;">
 
  					 <input type="button" value="查询" onclick="search()">
  					 </form>
 					 </div>
+					 
+			<div style="overflow-x: auto; overflow-y: auto;height:800px; width:100%;">
 				<table id="mytable" cellspacing="0"
 						summary="The technical specifications of the Apple PowerMac G5 series">
 						<tr>
@@ -332,7 +334,7 @@ th.nobg {
 							</tr>
 							</form>
 					</table>
-					
+					</div>
 				
 				
 			</div>

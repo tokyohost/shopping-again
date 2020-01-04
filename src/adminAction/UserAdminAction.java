@@ -48,6 +48,37 @@ public class UserAdminAction {
 		
 	}
 	
+	public static void addNewUserServlet(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {
+		//新增用户
+		
+		res.setContentType("text/html");
+		//获取session 
+		HttpSession session = req.getSession(true);
+		
+		UserService user = new UserServiceImpl();
+		
+		
+		
+		//do something ...
+		
+		try {
+			List<User> uList = user.queryAllUser();
+			session.setAttribute("uList", uList);
+			session.setAttribute("userCount", user.getUserCount());
+		} catch (Exception e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		
+		//页面跳转
+		req.getRequestDispatcher("/admin/user.jsp").forward(req, res);
+		
+		
+		
+		
+	}
+	
 	public static void SearchUserServlet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		//搜索用户

@@ -131,7 +131,12 @@ th.nobg {
 		var ca = document.getElementById("tid<%=pt.getCid() %>");
 		ca.action = "/shopping/servlet/ChangeTypeServlet";
 		ca.submit();
-	
+	}
+	function deletet<%= pt.getCid()%>(){
+		var ca = document.getElementById("tid<%=pt.getCid() %>");
+		ca.action = "/shopping/servlet/DeleteProductTypeServlet";
+		ca.submit();
+		
 	}
 	
 	
@@ -237,10 +242,10 @@ th.nobg {
 								
  								<input  type="button"  value="提交修改" style="float:left;" onclick="changet<%=item.getCid() %>()" >
 								</div>
-								<!-- <div style="width:45px;height:100%;float:right;">
-								<input type="button" value="删除商品" style="float:right;" onclick="deletep<%=item.getCid() %>()">
+								 <div style="width:45px;height:100%;float:right;">
+								<input type="button" value="删除" style="float:right;" onclick="deletet<%=item.getCid() %>()">
 								</div>
-								 -->
+								 
 								
 								</td>
 							</tr>

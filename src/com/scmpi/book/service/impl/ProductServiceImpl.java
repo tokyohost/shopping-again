@@ -88,4 +88,21 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 
+
+	@Override
+	public boolean deleteProductType(int typeid) throws Exception {
+		// TODO Auto-generated method stub
+		//删除商品类型
+		
+		String sql = "delete from product_category where cid = "+typeid+";";
+		
+		if(DBUtil.Update(sql)){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+
+
 }

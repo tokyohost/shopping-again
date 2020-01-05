@@ -120,6 +120,12 @@ th.nobg {
 	
 	}
 	
+	function addNew(){
+		var ca = document.getElementById("addNew");
+		ca.action = "/shopping/servlet/UserAdminServlet?action=addnew";
+		ca.submit();
+	}
+	
 	<%for(User u : uList){ %>
 	function changeu<%=u.getUid() %>(){
 		var ca = document.getElementById("uid<%=u.getUid() %>");
@@ -320,16 +326,16 @@ th.nobg {
 								<input type="text" name="uaddress" value=""><span style="color:red">*</span>
 							</td>
 							<td>
-								<input type="number"  step="0.1" name="balance" value=""><span style="color:red">*</span>
+								<input type="number"  step="0.1" name="balance" value="0"><span style="color:red">*</span>
 							</td>
 							<td>
-								<input type="number"  step="0.1" name="discount" value=""><span style="color:red">*</span>
+								<input type="number"  step="0.1" name="discount" value="0"><span style="color:red">*</span>
 							</td>
 							<td>
-								<input type="number"  step="0.1" name="integral" value=""><span style="color:red">*</span>
+								<input type="number"  step="0.1" name="integral" value="0"><span style="color:red">*</span>
 							</td>
 								<td style="width:100px;">
-								<input type="button" value="添加用户" onclick="addNewUser()">
+								<input type="button" value="添加用户" onclick="addNew()">
 								</td>
 							</tr>
 							</form>

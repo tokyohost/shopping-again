@@ -60,9 +60,23 @@ public class UserAdminAction {
 		
 		
 		
-		//do something ...
+		//do new user
+		User u = new User();
+		u.setUname(req.getParameter("uname"));
+		u.setUpasswd(req.getParameter("upasswd"));
+		u.setUemail(req.getParameter("uemail"));
+		u.setUaddress(req.getParameter("uaddress"));
+		u.setUphone(req.getParameter("uphone"));
+		u.setUsex(req.getParameter("usex"));
+		u.setBirthday(req.getParameter("birthday"));
+		u.setBalance(Float.parseFloat(req.getParameter("balance")));
+		u.setDiscount(Integer.parseInt(req.getParameter("discount")));
+		u.setIntegral(Integer.parseInt(req.getParameter("integral")));
+		
 		
 		try {
+			user.addUser(u);
+			
 			List<User> uList = user.queryAllUser();
 			session.setAttribute("uList", uList);
 			session.setAttribute("userCount", user.getUserCount());

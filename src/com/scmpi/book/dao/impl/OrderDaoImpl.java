@@ -153,7 +153,7 @@ public class OrderDaoImpl implements OrderDao {
 	public List<Order> queryAllOrder() throws ClassNotFoundException, SQLException{
 		//����ݿ��ȡ���ж�����Ϣ
 		
-		String sql = "select * from `Order` order by `Order_id` desc LIMIT 10";
+		String sql = "select * from `Order`";
 		
 		//��ȡ�������
 		ResultSet rs = DBUtil.queryData(sql);
@@ -229,6 +229,84 @@ public class OrderDaoImpl implements OrderDao {
 		
 	}
 
+	public List<Order> queryLimitOrder() throws ClassNotFoundException, SQLException{
+		//����ݿ��ȡ���ж�����Ϣ
+		
+		String sql = "select * from `Order` order by `Order_id` desc LIMIT 10";
+		
+		//��ȡ�������
+		ResultSet rs = DBUtil.queryData(sql);
+		
+		
+		List<Order> orderlist = new ArrayList<Order>();
+		
+			while(rs.next()){
+				Order o = new Order();
+				o.setOrder_id(rs.getInt("Order_id"));
+				o.setUser_id(rs.getInt("user_id"));
+				o.setTotal_amount(rs.getFloat("Total_amount"));
+				o.setOrder_date(rs.getString("order_date"));
+				o.setOrder_status(rs.getString("order_status"));
+				o.setUuid(rs.getString("uuid"));
+				
+				
+				
+				orderlist.add(o);//��ӵ�����б���
+				
+			}
+			//��ȡ��ϵ���󶩵�ÿһ��order_item
+			for(Order o:orderlist){
+				List<OrderItem> oid = new ArrayList<OrderItem>();
+				String uuid = o.getUuid();
+				//��ݶ���uuid��ѯ������
+				String sql1 = "select * from `Order_item` where `uuid`='"+uuid+"';";
+
+				rs = DBUtil.queryData(sql1);	//��ѯ������¸�ֵ
+				
+					while(rs.next()){
+						OrderItem oi = new OrderItem();
+						oi.setOid(rs.getInt("Oid"));
+						oi.setUser_id(rs.getInt("user_id"));
+						oi.setProduct_id(rs.getInt("product_id"));
+						oi.setOrder_num(rs.getInt("order_num"));
+						oi.setOrder_subtotal(rs.getFloat("order_Subtotal"));
+						oi.setUuid(uuid);
+						
+						oid.add(oi);
+					}
+					
+					//���product_id ��ѯ��Ʒ��Ϣ
+					for(OrderItem oi:oid){
+						int productid = oi.getProduct_id();	//��ȡproduct_id ��ѯproduct_item�е���Ʒ��
+						
+						String sql2 = "select * from `product_item` where `pid`="+productid+";";
+						
+						
+						rs = DBUtil.queryData(sql2);	//��ѯ������¸�ֵ
+						
+						
+							while(rs.next()){
+								Product p = new Product();
+								p.setPid(productid);
+								p.setPname(rs.getString("pname"));
+								p.setPclassifyid(String.valueOf(rs.getInt("pclassifyid")));
+								p.setPdate(rs.getString("pdate"));
+								p.setSuppliers(rs.getString("Suppliers"));
+								p.setPnumber(rs.getInt("pnumber"));
+								p.setPrice(rs.getFloat("price"));
+								
+								oi.setP(p);
+							}
+					}
+					Set<OrderItem> cache = new HashSet<OrderItem>(oid);			//List�б�ת  Set�������飡
+					o.setItems(cache);
+			}
+			
+			
+			return orderlist;
+			
+		
+	}
 
 	@Override
 	public void updateOrder(Order o) throws Exception {

@@ -6,5 +6,6 @@ public interface OrderDao {
 	public void insertOrder(Order o) throws Exception;
 	public List<Order> queryOrder(User u) throws Exception;
 	public List<Order> queryAllOrder() throws Exception;
+	public List<Order> queryLimitOrder() throws Exception;
 	public void updateOrder(Order o) throws Exception;
 }

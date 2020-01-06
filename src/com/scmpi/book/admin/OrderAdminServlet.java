@@ -47,8 +47,8 @@ public class OrderAdminServlet extends HttpServlet {
 		
 		
 		try {
-			//获取所有订单
-			oList = od.queryAllOrder();
+			//获取最新10条订单
+			oList = od.queryLimitOrder();
 			//获取订单数量
 			int orderNum = oList.size();
 			

@@ -195,6 +195,14 @@ th.nobg {
 				<!-- 右边详情页 -->
 				
 				<h1 style="margin-left:40px;margin-top:40px;margin-bottom:20px;font-size:24px;">订单管理页面</h1>
+				<div style="width:100%;height:100px;margin-left:40px;margin-right:40px;margin-top:10px;">
+					<h3 style="margin-bottom:20px;">当前仅显示最新<%=orderNum %>条记录，其他记录请搜索</h3>
+					 <form id="OrderSearch" action="" method="post" >
+					 <input type="text" name="qureyKey" value="" placeholder="输入用户名" style="margin-left:0px;">
+ 					 <input type="button" value="查询" onclick="search()">
+ 					 </form>
+					 </div>
+				
 				<table id="mytable" cellspacing="0"
 						summary="The technical specifications of the Apple PowerMac G5 series">
 						<tr>
@@ -272,13 +280,7 @@ th.nobg {
 							
 					</table>
 					
-					<div style="width:100%;height:100px;margin-left:40px;margin-right:40px;margin-top:100px;">
-					<h3 style="margin-bottom:20px;">当前订单共<%=orderNum %>项</h3>
-					 <form id="OrderSearch" action="" method="post" >
-					 <input type="text" name="qureyKey" value="" placeholder="输入用户名" style="margin-left:0px;">
- 					 <input type="button" value="查询" onclick="search()">
- 					 </form>
-					 </div>
+					
 				
 			</div>
 		

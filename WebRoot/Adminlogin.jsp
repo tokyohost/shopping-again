@@ -152,9 +152,6 @@ html>body td {
 				<li>
 					<a href="<%=path%>/register.jsp">[免费注册]</a>
 				</li>
-				<li>
-					<a href="<%=path%>/Adminlogin.jsp">[管理员登陆]</a>
-				</li>
 				
 			</ul>
 		</div>
